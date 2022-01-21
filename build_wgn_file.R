@@ -5,7 +5,6 @@ build_wgn_file=function(metdata_df=WXData,declat=flowgage$declat,declon=flowgage
   metdata_df$wnd=4
   years=length(unique(year(metdata_df$date)))
   
-  
   metdata_df$MaxTemp[is.na(metdata_df$MaxTemp)]=metdata_df$MinTemp[is.na(metdata_df$MaxTemp)] +1
   metdata_df$MinTemp[is.na(metdata_df$MinTemp)]=metdata_df$MaxTemp[is.na(metdata_df$MinTemp)] -1
   cleanup=(metdata_df$MaxTemp<metdata_df$MinTemp)
@@ -13,7 +12,7 @@ build_wgn_file=function(metdata_df=WXData,declat=flowgage$declat,declon=flowgage
   metdata_df$MaxTemp[cleanup]=metdata_df$MinTemp[cleanup]+1
   metdata_df$dewpt=metdata_df$MinTemp
   metdata_df$Solar=NA
-  metdata_df$Solar[!is.na(metdata_df$MaxTemp)]=Solar(lat=44.47/180*pi,
+  metdata_df$Solar[!is.na(metdata_df$MaxTemp)]=Solar(lat=declat/180*pi,
                                                      Jday=julian(metdata_df$date[!is.na(metdata_df$MaxTemp)],
                                                                  origin=as.Date("2000-01-01")),
                                                      Tx=metdata_df$MaxTemp[!is.na(metdata_df$MaxTemp)],
