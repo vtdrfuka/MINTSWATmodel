@@ -30,6 +30,10 @@ MINTSWATcalib=function(){
   x=calib_params$current
   swat_objective_function_rch(x,calib_range,calib_params,flowgage,rch,save_results=F)
 #  cl <- parallel::makeCluster(availableCores())
+  calib_range<<-calib_range
+  calib_params<<-calib_params
+  flowgage<<-flowgage
+  rch<<-rch
   outDEoptim<-DEoptim(swat_objective_function_rch,calib_params$min,calib_params$max,
                       DEoptim.control(cluster=cl,strategy = 6,NP = 16,itermax=deiter,parallelType = 1,
                       packages = c("SWATmodel","topmodel"), 
