@@ -32,7 +32,8 @@ MINTSWATcalib=function(){
   cl <- parallel::makeCluster(availableCores())
   outDEoptim<-DEoptim(swat_objective_function_rch,calib_params$min,calib_params$max,
                       DEoptim.control(cluster=cl,strategy = 6,NP = 16,itermax=deiter,parallelType = 1,
-                                      packages = c("SWATmodel","topmodel"),parVar=c("NSeff","SWAToutput"),calib_range,calib_params,flowgage,rch)
+                      packages = c("SWATmodel","topmodel"), 
+                      parVar=c("NSeff","SWAToutput"),calib_range,calib_params,flowgage,rch)
   x=outDEoptim$optim$bestmem  # need to save this, along with an ArcSWAT like directory structure for the basin  
   swat_objective_function_rch(x,calib_range,calib_params,flowgage,rch,save_results=TRUE)
   
